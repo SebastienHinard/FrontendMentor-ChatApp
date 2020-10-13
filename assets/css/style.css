@@ -25,38 +25,46 @@
 body {
     font-family: 'Rubik', sans-serif;
     font-size: 16px;
+    overflow-x: hidden;
     background: var(--light);
     color: var(--txt-color);
+    position: relative;
 }
 
 .attribution {
     font-size: 11px;
     text-align: center;
-
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
 }
+
 .attribution a {
     color: hsl(228, 45%, 44%);
+    text-decoration: none;
 }
 
 .bg-element {
     position: absolute;
     z-index: -10;
-    height: 400px;
-    width: 188px;
+    width: 400px;
+    border-bottom-right-radius: 200px;
+    border-bottom-left-radius: 200px;
 }
 
 .bg-element--dark {
+    height: 500px;
     top: 0;
-    left: 0;
+    left: -200px;
     background: linear-gradient(var(--gradient-light), var(--gradient-dark));
-    border-bottom-right-radius: 500px;
 }
 
 .bg-element--light {
-    bottom: -210px;
-    right: 0;
+    height: 300px;
+    bottom: 0;
+    right: -200px;
     background: var(--msg-bg);
-    border-top-left-radius: 500px;
+    transform: rotate(180deg);
 }
 
 .container {
@@ -73,6 +81,22 @@ body {
     background: #fff;
     width: 248px;
     margin: auto;
+    box-shadow: 10px 20px 20px #0002;
+    position: relative;
+}
+
+.phone:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 124px;
+    height: 20px;
+    background: #fff;
+    z-index: 100;
+    left: 61px;
+    top: 10px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 .chat {
@@ -92,6 +116,72 @@ body {
     border-top-right-radius: 20px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 20px 14px 0;
+}
+
+.top-menu__backlink {
+    width: 10px;
+    height: 10px;
+    position: relative;
+}
+
+.top-menu__backlink:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    transform: rotate(-45deg);
+}
+
+.top-menu__avatar {
+    width: 22px;
+    height: 22px;
+    margin: 0 10px 0 4px;
+    object-fit: cover;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+.top-menu__avatar-name {
+    font-size: 0.8em;
+    line-height: 1em;
+    color: #fff;
+    font-weight: 400;
+}
+
+.top-menu__avatar-status {
+    font-size: 0.5em;
+    color: #fff;
+    opacity: 0.6;
+}
+
+.top-menu__option-toggle {
+    margin-left: auto;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.top-menu__option-toggle span {
+    width: 2px;
+    height: 2px;
+    display: block;
+    background: #fff;
+    border-radius: 50%;
 }
 
 .chat__body {
@@ -119,6 +209,7 @@ body {
     color: var(--msg-sent-color);
     margin-left: auto;
     border-bottom-right-radius: 5px;
+    box-shadow: 4px 4px 10px #0001;
 }
 
 .msg--advert {
@@ -138,6 +229,30 @@ body {
     border-radius: 50%;
     background: transparent;
     margin-right: 10px;
+    position: relative;
+}
+
+.msg--advert input[type="checkbox"]:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    left: 2px;
+    top: 2px;
+    opacity: 0;
+    transition: 0.15s ease-in-out;
+}
+
+.msg--advert input[type="checkbox"]:checked:after {
+    opacity: 1;
+}
+
+.msg--advert input[type="checkbox"]:not(:checked)+label {
+    opacity: 0.6;
+    transition: 0.15s ease-in-out;
 }
 
 .msg__price {
@@ -216,17 +331,30 @@ body {
     color: var(--heading-color);
     font-size: 2em;
     font-weight: 500;
-    margin-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 .teaser-content {
     font-size: 0.85em;
     font-weight: 400;
     line-height: 1.7em;
-    margin-bottom: 60px;
+    padding-bottom: 60px;
 }
 
 @media (min-width: 768px) {
+    .bg-element {
+        max-width: 40vw;
+        height: 90vh;
+    }
+
+    .bg-element--dark {
+        left: -80px;
+    }
+
+    .bg-element--light {
+        right: -80px;
+    }
+
     body {
         display: flex;
         min-height: 100vh;
@@ -246,16 +374,16 @@ body {
 
     .teaser-container {
         text-align: left;
-        max-width: 460px;
+        max-width: 520px;
     }
 
     .teaser-heading {
         font-size: 2.2em;
-        margin-bottom: 0.5em;
+        padding-bottom: 0.5em;
     }
 
     .teaser-content {
         font-size: 1em;
-        margin-bottom: 0;
+        padding-bottom: 0;
     }
 }
